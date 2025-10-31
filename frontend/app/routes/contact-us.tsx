@@ -1,11 +1,12 @@
-import type { Route } from "./+types/contact-us";
 import { useState } from "react";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { Label } from "~/components/ui/label";
 import { useAddContact } from "~/api/mutations";
 
-export default function ContactUs({}: Route.ComponentProps) {
+//TODO: add form validation for name, email and phone number
+
+export default function ContactUs() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",

@@ -2,8 +2,9 @@ import type { Route } from "./+types/contact-list";
 import { useGetAllContacts } from "~/api/queries";
 import { useDeleteContact, useVerifyContact } from "~/api/mutations";
 import { Button } from "~/components/ui/button";
+import { useState } from "react";
 
-export default function ContactList({}: Route.ComponentProps) {
+export default function ContactList() {
   const { data: contacts, status } = useGetAllContacts();
   const deleteContact = useDeleteContact();
   const verifyContact = useVerifyContact();
@@ -35,8 +36,10 @@ export default function ContactList({}: Route.ComponentProps) {
             <br />
             <Button
               variant="default"
-              onClick={() => verifyContact.mutate(contact.id.toString())}
               disabled={contact.verified}
+              onClick={() => {
+                verifyContact.mutate(contact.id.toString());
+              }}
             >
               {contact.verified ? "Verified" : "Verify"}
             </Button>

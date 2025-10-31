@@ -1,14 +1,9 @@
-import {
-  mutationOptions,
-  useMutation,
-  QueryClient,
-} from "@tanstack/react-query";
+import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { GlobalQueryClient } from "queryclient";
 import type { Contact } from "./queries";
 
 //TODO: fix this, dont like it
 type NewContact = Omit<Contact, "id" | "created_time" | "updated_time">;
-
-const queryClient = new QueryClient();
 
 const ContactMutations = {
   addContact: () => {
@@ -21,15 +16,16 @@ const ContactMutations = {
           body: JSON.stringify(contact),
         });
         if (response.status !== 201) throw new Error("Failed to add contact");
-        return await response.json();
+        return response.json();
       },
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["contacts"] });
+        GlobalQueryClient.invalidateQueries({ queryKey: ["contacts"] });
       },
     });
   },
   deleteContact: () => {
     return mutationOptions({
+      //TODO: change this to number?
       mutationFn: async (contactId: string) => {
         //add error handling
         const response = await fetch(
@@ -42,15 +38,16 @@ const ContactMutations = {
         );
         if (response.status !== 200)
           throw new Error("Failed to delete contact");
-        return await response.ok;
+        return response.ok;
       },
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["contacts"] });
+        GlobalQueryClient.invalidateQueries({ queryKey: ["contacts"] });
       },
     });
   },
   verifyContact: () => {
     return mutationOptions({
+      //TODO: change this to number?
       mutationFn: async (contactId: string) => {
         const response = await fetch(
           `http://localhost:3000/contacts/${contactId}/verify`,
@@ -62,10 +59,10 @@ const ContactMutations = {
         );
         if (response.status !== 200)
           throw new Error("Failed to verify contact");
-        return await response.json();
+        return response.json();
       },
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["contacts"] });
+        GlobalQueryClient.invalidateQueries({ queryKey: ["contacts"] });
       },
     });
   },
