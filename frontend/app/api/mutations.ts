@@ -12,7 +12,6 @@ const ContactMutations = {
   addContact: () => {
     return mutationOptions({
       mutationFn: async (contact: NewContact) => {
-        //add error handling
         const response = await fetch(`${API_URL}/contacts`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
