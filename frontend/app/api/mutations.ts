@@ -1,9 +1,11 @@
 import { mutationOptions, useMutation } from "@tanstack/react-query";
 import { GlobalQueryClient } from "queryclient";
 import type { Contact } from "./queries";
+
 const API_URL = "http://localhost:3000";
 
-//TODO: fix this, dont like it
+//id and created time are auto generated in DB
+//updated time not necessary for a new contact
 type NewContact = Omit<Contact, "id" | "created_time" | "updated_time">;
 
 const ContactMutations = {
@@ -27,7 +29,6 @@ const ContactMutations = {
   deleteContact: () => {
     return mutationOptions({
       mutationFn: async (contactId: string) => {
-        //TODO:add error handling
         const response = await fetch(`${API_URL}/contacts/${contactId}`, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
