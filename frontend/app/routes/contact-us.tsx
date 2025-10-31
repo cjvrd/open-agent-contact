@@ -109,7 +109,9 @@ export default function ContactUs() {
               <h2 className="text-2xl font-semibold text-center">
                 Thanks for reaching out!
               </h2>
-              <p>We’ve received your message and will get back to you soon.</p>
+              <p className="text-center">
+                We’ve received your message and will get back to you soon.
+              </p>
             </div>
           ) : (
             <Form {...form}>
