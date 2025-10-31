@@ -12,14 +12,6 @@ services:
   backend:
     build:
       context: ./backend
-    environment:
-      PORT: 3000
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      DB_HOST: db
-      DB_PORT: 5432
-      DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
     ports:
       - "3000:3000"
     command: >-
@@ -28,10 +20,5 @@ services:
   frontend:
     build:
       context: ./frontend
-      args:
-        # Build the client bundle to call the host-exposed backend
-        VITE_API_URL: http://localhost:3000
-    environment:
-      PORT: 5173
     ports:
       - "5173:5173"

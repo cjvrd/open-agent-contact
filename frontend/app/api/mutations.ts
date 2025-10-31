@@ -1,8 +1,7 @@
 import { mutationOptions, useMutation } from "@tanstack/react-query";
 import { GlobalQueryClient } from "queryclient";
 import type { Contact } from "./queries";
-const API_URL =
-  (import.meta as any).env?.VITE_API_URL || "http://localhost:3000";
+const API_URL = "http://localhost:3000";
 
 //TODO: fix this, dont like it
 type NewContact = Omit<Contact, "id" | "created_time" | "updated_time">;

@@ -9,14 +9,11 @@ RUN npm ci
 
 FROM deps AS build
 COPY . .
-# Build-time API URL can be overridden via build arg; default points to backend service in compose
-ARG VITE_API_URL=http://backend:3000
-ENV VITE_API_URL=${VITE_API_URL}
 RUN npm run build
 
 FROM node:20-alpine AS runner
 WORKDIR /app
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/build ./build
 COPY --from=build /app/package.json ./package.json
