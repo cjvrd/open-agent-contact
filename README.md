@@ -2,8 +2,8 @@
 
 A simple full‑stack example app for collecting and managing contact requests.
 
-- Frontend: React
-- Backend: Node.js, Express
+- Frontend: React, React Router, Tanstack Query, Tailwind
+- Backend: Node.js, Express, Kysely
 - Database: Postgres via Prisma schema (Kysely types generated with prisma‑kysely)
 
 ## Quick start with Docker
