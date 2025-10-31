@@ -23,7 +23,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen flex flex-col">
         <header className="sticky top-0 z-50 bg-white border-b">
           <div className="container mx-auto h-16 flex items-center justify-between px-4">
             <Link to="/" className="flex items-center gap-2">
@@ -44,7 +44,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        <main className="container mx-auto px-4 py-6">{children}</main>
+        <main className="container mx-auto px-4 py-6 flex-1">{children}</main>
 
         <footer className="border-t">
           <div className="container mx-auto px-4 py-6 text-sm text-gray-500 flex items-center justify-between">
