@@ -76,7 +76,7 @@ export default function ContactList() {
                       <span className="text-sm">{contact.phone}</span>
                     </div>
                   </td>
-                  <td className="px-4 py-3 align-top">
+                  <td className="px-4 py-3">
                     {contact.notes ? (
                       <span
                         className="block max-w-[20ch] truncate text-sm"
