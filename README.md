@@ -12,7 +12,19 @@ Prerequisites:
 
 - Docker Desktop or Docker Engine
 
-Start the whole stack (DB + Backend + Frontend):
+Clone the repo:
+
+```zsh
+git clone https://github.com/cjvrd/open-agent-contact.git
+```
+
+Open the repo folder:
+
+```zsh
+cd open-agent-contact
+```
+
+Build the docker containers:
 
 ```zsh
 docker compose up --build
