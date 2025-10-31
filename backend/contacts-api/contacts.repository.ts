@@ -1,5 +1,5 @@
 import { db } from "../db";
-import type { Contact } from "../types";
+import { ContactReq } from "./contacts.controller";
 
 export const ContactRepository = {
   getAllContacts: async () =>
@@ -9,7 +9,7 @@ export const ContactRepository = {
       .where("status", "=", "ENABLED")
       .execute(),
 
-  createNewContact: async (contact: Contact) =>
+  createNewContact: async (contact: ContactReq) =>
     db
       .insertInto("Contact")
       .values({
@@ -23,19 +23,19 @@ export const ContactRepository = {
       .returningAll()
       .executeTakeFirst(),
 
-  deleteContact: async (id: number) =>
+  deleteContact: async (id: string) =>
     db
       .updateTable("Contact")
       .set({ status: "DELETED", updated_time: new Date() })
-      .where("id", "=", id)
+      .where("id", "=", Number(id))
       .returningAll()
       .executeTakeFirst(),
 
-  verifyContact: async (id: number) =>
+  verifyContact: async (id: string) =>
     db
       .updateTable("Contact")
       .set({ verified: true, updated_time: new Date() })
-      .where("id", "=", id)
+      .where("id", "=", Number(id))
       .returningAll()
       .executeTakeFirst(),
 };

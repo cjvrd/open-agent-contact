@@ -11,23 +11,9 @@ export default function ContactList({}: Route.ComponentProps) {
       <h1 className="text-2xl"></h1>
       <br></br>
       <h1 className="text-xl">
-        Please click below to go to either the "Contact Us" Page or the "Contact
-        List" Page
+        This is an example contact us app, please click either the Contact List
+        or Contact Us buttons on the top right.
       </h1>
-      <div className="flex justify-center gap-4 mt-2">
-        <a
-          className="text-blue-500 underline hover:text-blue-600"
-          href="/contact-us"
-        >
-          Contact Us Page
-        </a>
-        <a
-          className="text-blue-500 underline hover:text-blue-600"
-          href="/contact-list"
-        >
-          Contact List Page
-        </a>
-      </div>
     </div>
   );
 }

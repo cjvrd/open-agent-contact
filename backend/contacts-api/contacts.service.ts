@@ -1,13 +1,13 @@
 import { ContactRepository } from "./contacts.repository";
-import { Contact } from "../types";
+import { ContactReq } from "./contacts.controller";
 
 export const ContactService = {
   getContacts: async () => ContactRepository.getAllContacts(),
 
-  addContact: async (contact: Contact) =>
+  addContact: async (contact: ContactReq) =>
     ContactRepository.createNewContact(contact),
 
-  deleteContact: async (id: number) => ContactRepository.deleteContact(id),
+  deleteContact: async (id: string) => ContactRepository.deleteContact(id),
 
-  verifyContact: async (id: number) => ContactRepository.verifyContact(id),
+  verifyContact: async (id: string) => ContactRepository.verifyContact(id),
 };

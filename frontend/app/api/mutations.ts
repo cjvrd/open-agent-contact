@@ -1,6 +1,8 @@
 import { mutationOptions, useMutation } from "@tanstack/react-query";
 import { GlobalQueryClient } from "queryclient";
 import type { Contact } from "./queries";
+const API_URL =
+  (import.meta as any).env?.VITE_API_URL || "http://localhost:3000";
 
 //TODO: fix this, dont like it
 type NewContact = Omit<Contact, "id" | "created_time" | "updated_time">;
@@ -10,7 +12,7 @@ const ContactMutations = {
     return mutationOptions({
       mutationFn: async (contact: NewContact) => {
         //add error handling
-        const response = await fetch("http://localhost:3000/contacts", {
+        const response = await fetch(`${API_URL}/contacts`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(contact),
@@ -25,17 +27,13 @@ const ContactMutations = {
   },
   deleteContact: () => {
     return mutationOptions({
-      //TODO: change this to number?
       mutationFn: async (contactId: string) => {
-        //add error handling
-        const response = await fetch(
-          `http://localhost:3000/contacts/${contactId}`,
-          {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status: "DELETED" }),
-          }
-        );
+        //TODO:add error handling
+        const response = await fetch(`${API_URL}/contacts/${contactId}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: "DELETED" }),
+        });
         if (response.status !== 200)
           throw new Error("Failed to delete contact");
         return response.ok;
@@ -47,16 +45,12 @@ const ContactMutations = {
   },
   verifyContact: () => {
     return mutationOptions({
-      //TODO: change this to number?
       mutationFn: async (contactId: string) => {
-        const response = await fetch(
-          `http://localhost:3000/contacts/${contactId}/verify`,
-          {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ verified: true }),
-          }
-        );
+        const response = await fetch(`${API_URL}/contacts/${contactId}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ verified: true }),
+        });
         if (response.status !== 200)
           throw new Error("Failed to verify contact");
         return response.json();

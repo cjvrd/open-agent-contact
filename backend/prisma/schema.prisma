@@ -5,7 +5,7 @@ datasource db {
 
 generator kysely {
     provider = "prisma-kysely"
-    output   = "../backend"
+    output   = "../"
     fileName = "types.ts"
 }
 
@@ -16,8 +16,8 @@ model Contact {
     status       status   @default(ENABLED)
     first_name   String
     last_name    String
-    email        String   @unique
-    phone        String   @unique
+    email        String
+    phone        String
     notes        String?
     verified     Boolean  @default(false)
 }

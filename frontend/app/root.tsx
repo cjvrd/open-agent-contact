@@ -6,11 +6,13 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { Link } from "react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { GlobalQueryClient } from "queryclient";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import logoUrl from "./images/openagent.svg";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -22,7 +24,47 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <header className="sticky top-0 z-50 bg-white border-b">
+          <div className="container mx-auto h-16 flex items-center justify-between px-4">
+            <Link to="/" className="flex items-center gap-2">
+              <img src={logoUrl} alt="OpenAgent" className="h-8 w-auto" />
+              <span className="sr-only">OpenAgent</span>
+            </Link>
+            <nav className="flex items-center gap-6 text-sm">
+              <Link to="/" className="hover:underline">
+                Home
+              </Link>
+              <Link to="/contact-list" className="hover:underline">
+                Contact List
+              </Link>
+              <Link to="/contact-us" className="hover:underline">
+                Contact Us
+              </Link>
+            </nav>
+          </div>
+        </header>
+
+        <main className="container mx-auto px-4 py-6">{children}</main>
+
+        <footer className="border-t">
+          <div className="container mx-auto px-4 py-6 text-sm text-gray-500 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <img src={logoUrl} alt="OpenAgent" className="h-5 w-auto" />
+              <span>&copy; {new Date().getFullYear()} OpenAgent</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <a
+                href="mailto:support@openagent.com.au"
+                className="hover:underline"
+              >
+                support@openagent.com.au
+              </a>
+              <a href="tel:132434" className="hover:underline">
+                13 24 34
+              </a>
+            </div>
+          </div>
+        </footer>
         <ScrollRestoration />
         <Scripts />
       </body>

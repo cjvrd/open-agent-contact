@@ -10,9 +10,9 @@ contactsRouter.get("/", ContactController.getContacts);
 contactsRouter.post("/", ContactController.addContact);
 
 //Delete Contact
-contactsRouter.patch("/:id", ContactController.deleteContact);
+contactsRouter.delete("/:id", ContactController.deleteContact);
 
 //Verify Contact
-contactsRouter.patch("/:id/verify", ContactController.verifyContact);
+contactsRouter.patch("/:id", ContactController.verifyContact);
 
 export default contactsRouter;
