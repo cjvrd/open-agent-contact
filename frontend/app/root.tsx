@@ -8,7 +8,7 @@ import {
 } from "react-router";
 import { Link } from "react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { GlobalQueryClient } from "queryclient";
+import { GlobalQueryClient } from "~/query-client";
 
 import type { Route } from "./+types/root";
 import "./app.css";

@@ -1,8 +1,7 @@
 import { mutationOptions, useMutation } from "@tanstack/react-query";
-import { GlobalQueryClient } from "queryclient";
+import { GlobalQueryClient } from "~/query-client";
 import type { Contact } from "./queries";
-
-const API_URL = "http://localhost:3000";
+import { API_URL } from "./constants";
 
 //id and created time are auto generated in DB
 //updated time not necessary for a new contact

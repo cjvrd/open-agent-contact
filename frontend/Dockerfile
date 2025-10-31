@@ -1,26 +1,16 @@
-# syntax=docker/dockerfile:1
-
-FROM node:20-alpine AS base
+FROM node:20-alpine
 WORKDIR /app
+ENV NODE_ENV=development
 
-FROM base AS deps
+# Install dependencies (cached if package files unchanged)
 COPY package.json package-lock.json ./
 RUN npm ci
 
-FROM deps AS build
+# Copy source and build
 COPY . .
 RUN npm run build
 
-FROM node:20-alpine AS runner
-WORKDIR /app
-ENV NODE_ENV=development
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=build /app/build ./build
-COPY --from=build /app/package.json ./package.json
-
-# Expose the serve port
+# Expose the SSR port and start the server
 ENV PORT=5173
 EXPOSE 5173
-
-# Start the SSR server produced by @react-router/serve
 CMD ["npx", "react-router-serve", "./build/server/index.js"]
